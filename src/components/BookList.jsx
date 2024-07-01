@@ -1,33 +1,29 @@
 import { Component } from "react";
+import { Col, FormControl, Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
-import { Col, Form, Row } from "react-bootstrap";
 
 class BookList extends Component {
   state = {
-    searchQuery: ""
+    searchQuery: "",
   };
 
   render() {
+    const { books } = this.props;
     return (
       <>
-        <Row className="justify-content-center mt-5">
-          <Col xs={12} md={4} className="text-center">
-            <Form.Group>
-              <Form.Control
-                type="search"
-                placeholder="Cerca un libro"
-                value={this.state.searchQuery}
-                onChange={e => this.setState({ searchQuery: e.target.value })}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row className="g-2 mt-3">
-          {this.props.books
-            .filter(b => b.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
-            .map(b => (
-              <Col xs={12} md={4} key={b.asin}>
-                <SingleBook book={b} />
+        <FormControl
+          className="mb-3"
+          type="text"
+          placeholder="Cerca un libro"
+          value={this.state.searchQuery}
+          onChange={(e) => this.setState({ searchQuery: e.target.value })}
+        />
+        <Row className="g-3">
+          {books
+            .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
+            .map((book) => (
+              <Col xs={12} md={3} key={book.asin}>
+                <SingleBook book={book} />
               </Col>
             ))}
         </Row>

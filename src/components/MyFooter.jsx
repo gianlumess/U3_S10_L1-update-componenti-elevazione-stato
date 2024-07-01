@@ -1,9 +1,19 @@
-const MyFooter = () => (
-  <footer className="d-flex bg-dark mt-2">
-    <span className="text-white m-auto p-2">
-      <strong>EPICODE</strong> - Copyright {new Date().getFullYear()}
-    </span>
-  </footer>
-)
+import { Component } from "react";
 
-export default MyFooter
+class MyFooter extends Component {
+  render() {
+    return (
+      <div className="text-center bg-dark text-white p-4">
+        <h2>Contattaci</h2>
+        <div id="contatti">
+          <a href="tel: +3911223456">(+39) 11223456</a>
+          <br />
+          <a href="mailto: info@epicode.school">info@epicode.school</a>
+          <br />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default MyFooter;

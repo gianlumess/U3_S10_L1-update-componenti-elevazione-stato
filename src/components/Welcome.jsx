@@ -1,9 +1,14 @@
-import { Alert } from 'react-bootstrap'
+import { Component } from "react";
+import Alert from "react-bootstrap/Alert";
 
-const Welcome = () => (
-  <Alert className="text-center">
-    <h1>Benvenuti in EpiBooks!</h1>
-  </Alert>
-)
+class Welcome extends Component {
+  render() {
+    return (
+      <Alert className="mt-4 text-center display-5">
+        think of a book...<strong>find it!</strong>
+      </Alert>
+    );
+  }
+}
 
-export default Welcome
+export default Welcome;
