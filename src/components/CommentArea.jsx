@@ -34,7 +34,7 @@ class CommentArea extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="sticky-top">
         <h4>Commenti</h4>
         {this.state.reviews.length > 0 ? (
           <CommentList reviews={this.state.reviews} />

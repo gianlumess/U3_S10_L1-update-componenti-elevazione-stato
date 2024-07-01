@@ -19,14 +19,21 @@ class BookList extends Component {
           value={this.state.searchQuery}
           onChange={(e) => this.setState({ searchQuery: e.target.value })}
         />
-        <Row className="g-3">
-          {books
-            .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
-            .map((book) => (
-              <Col xs={6} md={3} key={book.asin}>
-                <SingleBook book={book} />
-              </Col>
-            ))}
+        <Row>
+          <Col xs={8}>
+            <Row className="g-3">
+              {books
+                .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
+                .map((book) => (
+                  <Col xs={6} md={3} key={book.asin}>
+                    <SingleBook book={book} />
+                  </Col>
+                ))}
+            </Row>
+          </Col>
+          <Col>
+            <CommentArea />
+          </Col>
         </Row>
       </>
     );
