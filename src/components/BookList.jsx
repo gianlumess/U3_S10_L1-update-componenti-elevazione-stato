@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Col, FormControl, Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   state = {
@@ -22,8 +23,9 @@ class BookList extends Component {
           {books
             .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
             .map((book) => (
-              <Col xs={12} md={3} key={book.asin}>
+              <Col xs={6} md={3} key={book.asin}>
                 <SingleBook book={book} />
+                <CommentArea />
               </Col>
             ))}
         </Row>
