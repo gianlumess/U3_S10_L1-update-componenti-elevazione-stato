@@ -25,7 +25,6 @@ class BookList extends Component {
             .map((book) => (
               <Col xs={6} md={3} key={book.asin}>
                 <SingleBook book={book} />
-                <CommentArea />
               </Col>
             ))}
         </Row>

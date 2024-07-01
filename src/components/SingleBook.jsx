@@ -8,14 +8,17 @@ class SingleBook extends Component {
   };
 
   handleToggle = () => {
-    this.setState({ selected: true });
+    this.setState({ selected: !this.state.selected });
   };
 
   render() {
     const { book } = this.props;
 
     return (
-      <Card onClick={(e) => this.handleToggle()}>
+      <Card
+        className={this.state.selected ? "border border-3 border-danger" : "border border-3 border-dark"}
+        onClick={() => this.handleToggle()}
+      >
         <Card.Img variant="top" src={book.img} />
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
