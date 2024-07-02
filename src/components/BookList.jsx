@@ -6,15 +6,14 @@ import CommentArea from "./CommentArea";
 class BookList extends Component {
   state = {
     searchQuery: "",
-    selected: false,
+    selectedAsin: "",
   };
 
-  handleToggle = () => {
-    this.setState({ selected: !this.state.selected });
+  changeAsin = (newAsin) => {
+    this.setState({ selectedAsin: newAsin });
   };
 
   render() {
-    const { books } = this.props;
     return (
       <>
         <FormControl
@@ -27,16 +26,16 @@ class BookList extends Component {
         <Row>
           <Col xs={8}>
             <Row className="g-3">
-              {books
+              {this.props.books
                 .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
                 .map((book) => (
                   <Col xs={6} md={3} key={book.asin}>
-                    <SingleBook book={book} handleToggle={this.handleToggle} />
+                    <SingleBook book={book} changeAsin={this.changeAsin} />
                   </Col>
                 ))}
             </Row>
           </Col>
-          <Col>{this.state.selected && <CommentArea asin={books} />}</Col>
+          <Col>{this.state.selected && <CommentArea asin={this.props.books} />}</Col>
         </Row>
       </>
     );
