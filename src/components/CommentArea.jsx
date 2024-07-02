@@ -32,6 +32,7 @@ class CommentArea extends Component {
   componentDidMount() {
     this.fetchReviews();
   }
+
   render() {
     return (
       <div className="sticky-top">

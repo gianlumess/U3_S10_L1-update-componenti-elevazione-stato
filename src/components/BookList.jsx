@@ -6,6 +6,11 @@ import CommentArea from "./CommentArea";
 class BookList extends Component {
   state = {
     searchQuery: "",
+    selected: false,
+  };
+
+  handleToggle = () => {
+    this.setState({ selected: !this.state.selected });
   };
 
   render() {
@@ -26,14 +31,12 @@ class BookList extends Component {
                 .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
                 .map((book) => (
                   <Col xs={6} md={3} key={book.asin}>
-                    <SingleBook book={book} />
+                    <SingleBook book={book} handleToggle={this.handleToggle} />
                   </Col>
                 ))}
             </Row>
           </Col>
-          <Col>
-            <CommentArea />
-          </Col>
+          <Col>{this.state.selected && <CommentArea asin={books} />}</Col>
         </Row>
       </>
     );
