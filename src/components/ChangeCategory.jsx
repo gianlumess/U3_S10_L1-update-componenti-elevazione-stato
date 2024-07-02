@@ -7,7 +7,7 @@ import scifi from "../books/scifi.json";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
-class AllTheBooks extends Component {
+class ChangeCategory extends Component {
   state = {
     category: fantasy,
   };
@@ -34,4 +34,4 @@ class AllTheBooks extends Component {
   }
 }
 
-export default AllTheBooks;
+export default ChangeCategory;

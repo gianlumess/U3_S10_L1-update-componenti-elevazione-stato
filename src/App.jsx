@@ -10,7 +10,7 @@ import horror from "../src/books/horror.json";
 import romance from "../src/books/romance.json";
 import scifi from "../src/books/scifi.json";
 import BookList from "./components/BookList";
-import AllTheBooks from "./components/AllTheBooks";
+import ChangeCategory from "./components/ChangeCategory";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <MyNav />
       <Container>
         <Welcome />
-        <AllTheBooks />
+        <ChangeCategory />
         <BookList books={horror} />
       </Container>
       <MyFooter />

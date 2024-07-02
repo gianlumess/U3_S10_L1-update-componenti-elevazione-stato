@@ -13,7 +13,11 @@ class SingleBook extends Component {
   render() {
     return (
       <Card
-        className={this.state.selected ? "border border-3 border-danger" : "border border-3 border-dark"}
+        className={
+          this.props.selectedAsin === this.props.book.asin
+            ? "border border-3 border-danger"
+            : "border border-3 border-dark"
+        }
         onClick={() => {
           this.props.changeAsin(this.props.book.asin);
           this.changeCurrentState();
