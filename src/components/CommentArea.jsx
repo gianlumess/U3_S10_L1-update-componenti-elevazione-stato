@@ -1,15 +1,19 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import { Alert } from "react-bootstrap";
 import AddComment from "./AddComment";
 
-class CommentArea extends Component {
-  state = {
+const CommentArea = (props) => {
+  /*  state = {
     reviews: [],
-  };
+  }; */
 
-  fetchReviews = () => {
-    fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.asin, {
+  const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchReviews = () => {
+    setIsLoading(true);
+    fetch("https://striveschool-api.herokuapp.com/api/comments/" + props.asin, {
       headers: {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjdkN2E2NTNhMzhjYjAwMTVmNjNkNGEiLCJpYXQiOjE3MTk0OTkzNjUsImV4cCI6MTcyMDcwODk2NX0._sLOFwceL_eYGDe30nmimOoigh2oUxvTNmf4O1ZVrUM",
@@ -24,31 +28,27 @@ class CommentArea extends Component {
         }
       })
       .then((review) => {
-        this.setState({ reviews: review });
+        setReviews(review);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.asin !== this.props.asin) {
-      console.log("asin diverso,avvio fetch");
-      this.fetchReviews();
-    }
-  }
+  useEffect(() => {
+    fetchReviews();
+  }, [props.asin]);
 
-  render() {
-    return (
-      <div className="sticky-top">
-        <h4>Commenti</h4>
+  return (
+    <div className="sticky-top">
+      <h4>Commenti</h4>
 
-        <AddComment asin={this.props.asin} />
-        {this.props.asin === "" ? (
-          <Alert>Seleziona un libro per vedere le recensioni</Alert>
-        ) : (
-          <CommentList reviews={this.state.reviews} />
-        )}
-      </div>
-    );
-  }
-}
+      <AddComment asin={props.asin} />
+      {props.asin === "" ? (
+        <Alert>Seleziona un libro per vedere le recensioni</Alert>
+      ) : (
+        <CommentList reviews={reviews} isLoading={isLoading} />
+      )}
+    </div>
+  );
+};
 export default CommentArea;
