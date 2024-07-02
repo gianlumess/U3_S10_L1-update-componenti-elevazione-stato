@@ -1,47 +1,48 @@
-import { Component } from "react";
+import { useState } from "react";
 import { Col, FormControl, Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
 import CommentArea from "./CommentArea";
 
-class BookList extends Component {
-  state = {
+const BookList = (props) => {
+  /*  state = {
     searchQuery: "",
     selectedAsin: "",
+  }; */
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedAsin, setSelectedAsin] = useState("");
+
+  const changeAsin = (newAsin) => {
+    setSelectedAsin(newAsin);
   };
 
-  changeAsin = (newAsin) => {
-    this.setState({ selectedAsin: newAsin });
-  };
-
-  render() {
-    return (
-      <>
-        <FormControl
-          className="mb-3"
-          type="text"
-          placeholder="Cerca un libro"
-          value={this.state.searchQuery}
-          onChange={(e) => this.setState({ searchQuery: e.target.value })}
-        />
-        <Row>
-          <Col xs={8}>
-            <Row className="g-3">
-              {this.props.books
-                .filter((book) => book.title.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
-                .map((book) => (
-                  <Col xs={6} md={3} key={book.asin}>
-                    <SingleBook book={book} changeAsin={this.changeAsin} selectedAsin={this.state.selectedAsin} />
-                  </Col>
-                ))}
-            </Row>
-          </Col>
-          <Col>
-            <CommentArea asin={this.state.selectedAsin} />
-          </Col>
-        </Row>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <FormControl
+        className="mb-3"
+        type="text"
+        placeholder="Cerca un libro"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <Row>
+        <Col xs={8}>
+          <Row className="g-3">
+            {props.books
+              .filter((book) => book.title.toLowerCase().includes(searchQuery.toLowerCase()))
+              .map((book) => (
+                <Col xs={6} md={3} key={book.asin}>
+                  <SingleBook book={book} changeAsin={changeAsin} selectedAsin={selectedAsin} />
+                </Col>
+              ))}
+          </Row>
+        </Col>
+        <Col>
+          <CommentArea asin={selectedAsin} />
+        </Col>
+      </Row>
+    </>
+  );
+};
 
 export default BookList;
