@@ -5,7 +5,7 @@ const CommentList = (props) => {
   return (
     <ListGroup>
       {props.reviews.map((review) => (
-        <SingleComment key={review._id} recensione={review} />
+        <SingleComment key={review._id} recensione={review.comment} voto={review.rate} />
       ))}
     </ListGroup>
   );

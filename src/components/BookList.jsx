@@ -35,7 +35,9 @@ class BookList extends Component {
                 ))}
             </Row>
           </Col>
-          <Col>{this.state.selected && <CommentArea asin={this.props.books} />}</Col>
+          <Col>
+            <CommentArea asin={this.state.selectedAsin} />
+          </Col>
         </Row>
       </>
     );

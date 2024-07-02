@@ -12,7 +12,7 @@ class CommentArea extends Component {
     fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.asin, {
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZmZmNDdjMjM5YzAwMTUyZjRiNzQiLCJpYXQiOjE3MTgzNTM5MDgsImV4cCI6MTcxOTU2MzUwOH0.YxOTllrumawWZJ4LtdXWOHBZKu9J2pg4-y4aQ09JeiQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjdkN2E2NTNhMzhjYjAwMTVmNjNkNGEiLCJpYXQiOjE3MTk0OTkzNjUsImV4cCI6MTcyMDcwODk2NX0._sLOFwceL_eYGDe30nmimOoigh2oUxvTNmf4O1ZVrUM",
       },
     })
       .then((resp) => {
@@ -29,20 +29,24 @@ class CommentArea extends Component {
       .catch((err) => console.log(err));
   };
 
-  componentDidMount() {
-    this.fetchReviews();
+  componentDidUpdate(prevProps) {
+    if (prevProps.asin !== this.props.asin) {
+      console.log("asin diverso,avvio fetch");
+      this.fetchReviews();
+    }
   }
 
   render() {
     return (
       <div className="sticky-top">
         <h4>Commenti</h4>
-        {this.state.reviews.length > 0 ? (
-          <CommentList reviews={this.state.reviews} />
-        ) : (
-          <Alert bg="info">Non ci sono ancora commenti</Alert>
-        )}
+
         <AddComment asin={this.props.asin} />
+        {this.props.asin === "" ? (
+          <Alert>Seleziona un libro per vedere le recensioni</Alert>
+        ) : (
+          <CommentList reviews={this.state.reviews} />
+        )}
       </div>
     );
   }
