@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Form, FormGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 class AddComment extends Component {
   state = {
@@ -18,7 +18,7 @@ class AddComment extends Component {
       headers: {
         "Content-type": "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZmZmNDdjMjM5YzAwMTUyZjRiNzQiLCJpYXQiOjE3MTgzNTM5MDgsImV4cCI6MTcxOTU2MzUwOH0.YxOTllrumawWZJ4LtdXWOHBZKu9J2pg4-y4aQ09JeiQ",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjdkN2E2NTNhMzhjYjAwMTVmNjNkNGEiLCJpYXQiOjE3MTk0OTkzNjUsImV4cCI6MTcyMDcwODk2NX0._sLOFwceL_eYGDe30nmimOoigh2oUxvTNmf4O1ZVrUM",
       },
     })
       .then((resp) => {
@@ -47,16 +47,20 @@ class AddComment extends Component {
             onChange={(e) => {
               this.setState({ newComment: { ...this.state.newComment, comment: e.target.value } });
             }}
+            required
           />
         </Form.Group>
         <Form.Select
           aria-label="Default select example"
           value={this.state.newComment.rate}
           onChange={(e) => {
-            this.setState({ newComment: { ...this.state.newComment, rate: e.target.value } });
+            this.setState({
+              newComment: { ...this.state.newComment, rate: e.target.value, elementId: this.props.asin },
+            });
           }}
+          required
         >
-          <option>Open this select menu</option>
+          <option>Inserisci un voto</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
