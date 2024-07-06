@@ -26,18 +26,18 @@ const BookList = (props) => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <Row>
-        <Col xs={8}>
+        <Col xs={12} md={8}>
           <Row className="g-3">
             {props.books
               .filter((book) => book.title.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((book) => (
-                <Col xs={6} md={3} key={book.asin}>
+                <Col xs={12} md={4} lg={3} key={book.asin}>
                   <SingleBook book={book} changeAsin={changeAsin} selectedAsin={selectedAsin} />
                 </Col>
               ))}
           </Row>
         </Col>
-        <Col>
+        <Col className="d-none d-md-block">
           <CommentArea asin={selectedAsin} />
         </Col>
       </Row>
