@@ -37,10 +37,11 @@ class AddComment extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} className="mb-3">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Comment</Form.Label>
           <Form.Control
+            className="mb-3"
             type="text"
             placeholder="Inserisci un commento"
             value={this.state.newComment.comment}
@@ -49,24 +50,24 @@ class AddComment extends Component {
             }}
             required
           />
+          <Form.Select
+            aria-label="Default select example"
+            value={this.state.newComment.rate}
+            onChange={(e) => {
+              this.setState({
+                newComment: { ...this.state.newComment, rate: e.target.value, elementId: this.props.asin },
+              });
+            }}
+            required
+          >
+            <option>Inserisci un voto</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </Form.Select>
         </Form.Group>
-        <Form.Select
-          aria-label="Default select example"
-          value={this.state.newComment.rate}
-          onChange={(e) => {
-            this.setState({
-              newComment: { ...this.state.newComment, rate: e.target.value, elementId: this.props.asin },
-            });
-          }}
-          required
-        >
-          <option>Inserisci un voto</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </Form.Select>
         <Button type="submit" variant="primary">
           Invia commento
         </Button>

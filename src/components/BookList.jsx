@@ -19,7 +19,7 @@ const BookList = (props) => {
   return (
     <>
       <FormControl
-        className="mb-3"
+        className="mb-5"
         type="text"
         placeholder="Cerca un libro"
         value={searchQuery}
